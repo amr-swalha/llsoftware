@@ -7,7 +7,7 @@ namespace Runner
     {
         static void Main(string[] args)
         {
-            Core.XmlGenerator xml = new XmlGenerator();
+            XmlGenerator xml = new XmlGenerator();
             JSONGenerator json = new JSONGenerator();
             xml.ConnectionString =
                 "Data Source=.\\sql; Initial Catalog=LLProject; Integrated Security=True; MultipleActiveResultSets=True;";
