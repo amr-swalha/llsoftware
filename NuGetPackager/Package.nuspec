@@ -2,12 +2,12 @@
 <package >
   <metadata>
     <id>LifeLongSoftware</id>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <title>LifeLongSoftware</title>
     <authors>Amr Swalha</authors>
     <owners></owners>
     <description>
-      The official Life Long Software NuGet Pakcage. This package allow you to generate XML and JSON description for your software
+      The official Life Long Software NuGet Pakcage. This package allow you to generate XML and JSON description for your software. On Medium: https://medium.com/@amrswalha/lifelong-software-system-maintainability-part-1-7e0af04a179e
     </description>
     <releaseNotes>
     </releaseNotes>
@@ -21,6 +21,9 @@
     <licenseUrl>http://opensource.org/licenses/Apache-2.0</licenseUrl>
     <copyright>Copyright  2017</copyright>
     <dependencies>
+      <group targetFramework="net45">
+        <dependency id="Newtonsoft.Json" version="9.0.1" />
+      </group>
     </dependencies>
     <references></references>
     <tags></tags>
