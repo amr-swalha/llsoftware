@@ -16,7 +16,11 @@ namespace Core
             List<Table> tables = _data.ConverTables(ConnectionString);
             return tables;
         }
-
+        /// <summary>
+        /// Generates the description.
+        /// </summary>
+        /// <param name="outputFilePath">The output file path. Where the json file will be stored.</param>
+        /// <returns><c>true</c> if generation is successful, <c>false</c> otherwise.</returns>
         public bool GenerateDescription(string outputFilePath)
         {
             try
@@ -26,7 +30,7 @@ namespace Core
                 File.AppendAllText(outputFilePath, json);
                 return true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }
