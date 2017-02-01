@@ -7,10 +7,14 @@ using Core.SqlServer;
 using Newtonsoft.Json;
 namespace Core
 {
-    public class JSONGenerator : IGenerator
+    public class JsonGenerator : IGenerator
     {
         private readonly SqlToTable _data = new SqlToTable();
         public string ConnectionString { get; set; }
+        public JsonGenerator(string connectionString)
+        {
+            ConnectionString = connectionString;
+        }
         public List<Table> ReadSqlTable()
         {
             List<Table> tables = _data.ConverTables(ConnectionString);
@@ -27,6 +31,24 @@ namespace Core
             {
                 List<Table> tables = ReadSqlTable();
                 string json = JsonConvert.SerializeObject(tables);
+                File.AppendAllText(outputFilePath, json);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool GenerateUi(string outputFilePath)
+        {
+            try
+            {
+                SqlToTable sqlToTable = new SqlToTable();
+                List<Pages> pages = sqlToTable.GetPages(ConnectionString);
+                string json = JsonConvert.SerializeObject(pages);
+                if (File.Exists(outputFilePath))
+                    File.Delete(outputFilePath);
                 File.AppendAllText(outputFilePath, json);
                 return true;
             }

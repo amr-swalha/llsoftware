@@ -47,6 +47,8 @@
     <Compile Include="Generator\IGenerator.cs" />
     <Compile Include="JSONGenerator.cs" />
     <Compile Include="Models\Columns.cs" />
+    <Compile Include="Models\PageControls.cs" />
+    <Compile Include="Models\Pages.cs" />
     <Compile Include="Models\Table.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlServer\SqlToTable.cs" />

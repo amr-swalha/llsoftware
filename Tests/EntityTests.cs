@@ -15,7 +15,7 @@ namespace Tests
            "D:\\file2.json")]
             public void CheckJson(string connection, string path)
             {
-                JSONGenerator json = new JSONGenerator();
+                JsonGenerator json = new JsonGenerator();
                 json.ConnectionString = connection;
                 Assert.AreEqual(json.GenerateDescription(path), true);
             }
@@ -23,7 +23,7 @@ namespace Tests
             [TestCase("Check Value")]
             public void CheckConn(string test)
             {
-                JSONGenerator json = new JSONGenerator();
+                JsonGenerator json = new JsonGenerator();
                 json.ConnectionString = test;
                 Assert.AreEqual("Check Value", json.ConnectionString);
             }
@@ -31,7 +31,7 @@ namespace Tests
             [TestCase("Data Source =.\\sql; Initial Catalog = LLProject; Integrated Security = True; MultipleActiveResultSets = True;")]
             public void CheckTableCount(string connection)
             {
-                JSONGenerator json = new JSONGenerator();
+                JsonGenerator json = new JsonGenerator();
                 json.ConnectionString = connection;
                 Assert.Greater(json.ReadSqlTable().Count, 0);
             }
