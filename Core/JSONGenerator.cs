@@ -39,7 +39,12 @@ namespace Core
                 return false;
             }
         }
-
+        /// <summary>
+        /// Generates the UI. Make sure that you have _Pages 
+        /// and _PageControls Tables in the database witht he defenations of pages and controls
+        /// </summary>
+        /// <param name="outputFilePath">The output file path.</param>
+        /// <returns><c>true</c> if the generation is successful, <c>false</c> otherwise.</returns>
         public bool GenerateUi(string outputFilePath)
         {
             try
