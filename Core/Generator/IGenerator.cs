@@ -21,5 +21,6 @@ namespace Core.Generator
     {
         List<Table> ReadSqlTable();
         bool GenerateDescription(string outputFilePath);
+        bool GenerateUi(string outputFilePath);
     }
 }

@@ -11,6 +11,10 @@ namespace Core
     {
         private readonly SqlToTable _data = new SqlToTable();
         public string ConnectionString { get; set; }
+        public XmlGenerator(string connectionString)
+        {
+            ConnectionString = connectionString;
+        }
         public List<Table> ReadSqlTable()
         {
             List<Table> tables = _data.ConverTables(ConnectionString);
@@ -52,6 +56,45 @@ namespace Core
                 return true;
             }
             catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public bool GenerateUi(string outputFilePath)
+        {
+            try
+            {
+                SqlToTable sqlToTable = new SqlToTable();
+                List<Pages> pages = sqlToTable.GetPages(ConnectionString);
+                XmlDocument xmlDoc = new XmlDocument();
+                XmlNode rootNode = xmlDoc.CreateElement("pages");
+                xmlDoc.AppendChild(rootNode);
+                for (int i = 0; i < pages.Count; i++)
+                {
+                    XmlNode tableNode = xmlDoc.CreateElement("page");
+                    XmlAttribute attribute = xmlDoc.CreateAttribute("Name");
+                    attribute.Value = pages[i].PageName;
+                    for (int j = 0; j < pages[i].Controles.Count; j++)
+                    {
+                        XmlNode columnNode = xmlDoc.CreateElement("control");
+                        XmlAttribute attributeName = xmlDoc.CreateAttribute("ControlName");
+                        XmlAttribute attributeType = xmlDoc.CreateAttribute("ControlType");
+                        XmlAttribute attributeValue = xmlDoc.CreateAttribute("ControlValue");
+                        attributeName.Value = pages[i].Controles[j].ControlName;
+                        attributeType.Value = pages[i].Controles[j].ControlType;
+                        attributeValue.Value = pages[i].Controles[j].ControlValue;
+                        columnNode.Attributes.Append(attributeName);
+                        columnNode.Attributes.Append(attributeType);
+                        tableNode.AppendChild(columnNode);
+                    }
+                    tableNode.Attributes.Append(attribute);
+                    rootNode.AppendChild(tableNode);
+                }
+                xmlDoc.Save(outputFilePath);
+                return true;
+            }
+            catch (Exception)
             {
                 return false;
             }
